@@ -135,14 +135,32 @@ results_combined_5 <- results_combined_4[, c(1,2,3,29,4:28)]
 
 results_combined_5 %>% filter(league == "Barclays Premier League") %>% filter(season == "2018-19") %>% View()
 
-results_combined_5 %>% 
-  filter(league == "Barclays Premier League") %>% 
-  filter(season == "2016-17") %>% 
+  mutate(goal_differential = ifelse(is.na(goal_differential), 0, goal_differential)) %>% 
+  #filter(season == "2016-17") %>% 
   group_by(season, team) %>% 
   summarise(total_points = sum(points),
             total_goal_differential = sum(goal_differential)) %>% 
-  arrange(desc(total_points)) %>% 
+  arrange(season, desc(total_points)) %>%
+  group_by(season) %>% 
+  mutate(rank = row_number()) %>% 
+  select(season, rank, team, total_points, total_goal_differential) %>% 
   View()
 
+premier_league_results <- results_combined_5 %>% 
+  filter(league == "Barclays Premier League")
 
-#write.csv(results_combined, file = "~/Downloads/results_combined.csv")
+premier_league_table <- premier_league_results %>% 
+  mutate(goal_differential = ifelse(is.na(goal_differential), 0, goal_differential)) %>% 
+  #filter(season == "2016-17") %>% 
+  group_by(season, team) %>% 
+  summarise(total_points = sum(points),
+            total_goal_differential = sum(goal_differential)) %>% 
+  arrange(season, desc(total_points)) %>%
+  group_by(season) %>% 
+  mutate(rank = row_number()) %>% 
+  select(season, rank, team, total_points, total_goal_differential)
+
+premier_league_results %>% 
+  filter(team == "Arsenal", date_actual ) %>% 
+  ggplot(aes(date_actual, spi)) +
+  geom_point()
