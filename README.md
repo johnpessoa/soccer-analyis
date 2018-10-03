@@ -1,6 +1,6 @@
 # Everything Football
 
-## This space will be used to analyze football :soccer: through a various number of datasets. 
+## This space will be used to analyze football :soccer: through a number of different datasets. 
 
 ### Datasets:
 - [Fivethirtyeight](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)
