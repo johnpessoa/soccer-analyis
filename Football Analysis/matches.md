@@ -143,7 +143,7 @@ results_combined_4 <-  results_combined_3 %>%
 results_combined_5 <- results_combined_4[, c(1,2,3,29,4:28)]
 ```
 
-###Tidy Data
+### Tidy Data
 
 Alright. Let's see how this looks after the clean up.
 
@@ -184,6 +184,83 @@ bpl_standings <- results_combined_5 %>%
   select(season, rank, team, total_points, total_goal_differential)
 
 bpl_standings %>%  
+  head(n = 20) %>% 
+  knitr::kable()
+```
+
+
+
+|season  | rank|team                 | total_points| total_goal_differential|
+|:-------|----:|:--------------------|------------:|-----------------------:|
+|2016-17 |    1|Chelsea              |           93|                      52|
+|2016-17 |    2|Tottenham Hotspur    |           86|                      60|
+|2016-17 |    3|Manchester City      |           78|                      41|
+|2016-17 |    4|Liverpool            |           76|                      36|
+|2016-17 |    5|Arsenal              |           75|                      33|
+|2016-17 |    6|Manchester United    |           69|                      25|
+|2016-17 |    7|Everton              |           61|                      18|
+|2016-17 |    8|AFC Bournemouth      |           46|                     -12|
+|2016-17 |    9|Southampton          |           46|                      -7|
+|2016-17 |   10|West Bromwich Albion |           45|                      -8|
+|2016-17 |   11|West Ham United      |           45|                     -17|
+|2016-17 |   12|Leicester City       |           44|                     -15|
+|2016-17 |   13|Stoke City           |           44|                     -15|
+|2016-17 |   14|Crystal Palace       |           41|                     -13|
+|2016-17 |   15|Swansea City         |           41|                     -25|
+|2016-17 |   16|Burnley              |           40|                     -16|
+|2016-17 |   17|Watford              |           40|                     -28|
+|2016-17 |   18|Hull City            |           34|                     -43|
+|2016-17 |   19|Middlesbrough        |           28|                     -26|
+|2016-17 |   20|Sunderland           |           24|                     -40|
+
+Nice! It looks like the cleaning up worked and I was able to replicate the same table that I can see online. It hurts
+to see Arsenal fifth but at least that is the true story and I got the right data :disappointed: 
+# Premier League Numbers
+Let's take a look at some of the premier numbers over the past couple seasons.
+
+### Premier League results -
+
+
+
+```r
+premier_league_results <- results_combined_5 %>% 
+  filter(league == "Barclays Premier League")
+
+premier_league_results %>% 
+  head %>% 
+  knitr::kable()
+```
+
+
+
+| match_id| league_id|league                  |season  |date_actual |team           | home|opp            | opp_home|   spi| opp_spi|   prob| opp_prob| probtie| score| opp_score| proj_score| opp_proj_score| importance| opp_importance|   xg| opp_xg| nsxg| opp_nsxg| adj_score| opp_adj_score|result | points| goal_differential|
+|--------:|---------:|:-----------------------|:-------|:-----------|:--------------|----:|:--------------|--------:|-----:|-------:|------:|--------:|-------:|-----:|---------:|----------:|--------------:|----------:|--------------:|----:|------:|----:|--------:|---------:|-------------:|:------|------:|-----------------:|
+|        3|      2411|Barclays Premier League |2016-17 |2016-08-13  |Hull City      |    1|Leicester City |        0| 53.57|   66.81| 0.3459|   0.3621|  0.2921|     2|         1|       1.16|           1.24|       38.1|           22.2| 0.85|   2.77| 0.17|     1.25|      2.10|          1.05|win    |      3|                 1|
+|        3|      2411|Barclays Premier League |2016-17 |2016-08-13  |Leicester City |    0|Hull City      |        1| 66.81|   53.57| 0.3621|   0.3459|  0.2921|     1|         2|       1.24|           1.16|       22.2|           38.1| 2.77|   0.85| 1.25|     0.17|      1.05|          2.10|loss   |      0|                -1|
+|        4|      2411|Barclays Premier League |2016-17 |2016-08-13  |Burnley        |    1|Swansea City   |        0| 58.98|   59.74| 0.4482|   0.2663|  0.2854|     0|         1|       1.37|           1.05|       36.5|           29.1| 1.24|   1.84| 1.71|     1.56|      0.00|          1.05|loss   |      0|                -1|
+|        4|      2411|Barclays Premier League |2016-17 |2016-08-13  |Swansea City   |    0|Burnley        |        1| 59.74|   58.98| 0.2663|   0.4482|  0.2854|     1|         0|       1.05|           1.37|       29.1|           36.5| 1.84|   1.24| 1.56|     1.71|      1.05|          0.00|win    |      3|                 1|
+|        5|      2411|Barclays Premier League |2016-17 |2016-08-13  |Middlesbrough  |    1|Stoke City     |        0| 56.32|   60.35| 0.4380|   0.2692|  0.2927|     1|         1|       1.30|           1.01|       33.9|           32.5| 1.40|   0.55| 1.13|     1.06|      1.05|          1.05|tie    |      1|                 0|
+|        5|      2411|Barclays Premier League |2016-17 |2016-08-13  |Stoke City     |    0|Middlesbrough  |        1| 60.35|   56.32| 0.2692|   0.4380|  0.2927|     1|         1|       1.01|           1.30|       32.5|           33.9| 0.55|   1.40| 1.06|     1.13|      1.05|          1.05|tie    |      1|                 0|
+
+### Premier League finishes by season
+I'll have to do some manipulation here to substitute the NA values (future matches) for 0 in order to get the correct
+goal differential for the current season
+
+
+
+```r
+premier_league_table <- premier_league_results %>% 
+  mutate(goal_differential = ifelse(is.na(goal_differential), 0, goal_differential)) %>% 
+  #filter(season == "2016-17") %>% 
+  group_by(season, team) %>% 
+  summarise(total_points = sum(points),
+            total_goal_differential = sum(goal_differential)) %>% 
+  arrange(season, desc(total_points)) %>%
+  group_by(season) %>% 
+  mutate(rank = row_number()) %>% 
+  select(season, rank, team, total_points, total_goal_differential)
+
+premier_league_table %>% 
   head() %>% 
   knitr::kable()
 ```
@@ -198,5 +275,28 @@ bpl_standings %>%
 |2016-17 |    4|Liverpool         |           76|                      36|
 |2016-17 |    5|Arsenal           |           75|                      33|
 |2016-17 |    6|Manchester United |           69|                      25|
+
+## What's the SPI of Premier League teams looking like every week compared to the rest of the world? 
+I'm pretty sure I'm able to create some sort of visual here highlight premier league teams SPI and greying out
+all other teams SPI. 
+
+
+
+```r
+grey_results <- results_combined_5[, -6] %>% filter(date_actual < "2018-09-20")
+
+results_combined_5 %>% 
+  filter(league == "Barclays Premier League", date_actual < "2018-09-20") %>% 
+  ggplot(aes(date_actual, spi, color = league)) + 
+  geom_jitter(data = grey_results, colour = "grey") +
+  geom_jitter(alpha = .8, size = 3, color = "cyan4") +
+  theme_expapp() +
+  scale_color_discrete(guide = FALSE) +
+  xlab("Date") +
+  ylab("SPI") +
+  ggtitle("Barclays Premier League Comparison","SPI of Premier League teams compared to the rest")
+```
+
+![plot of chunk SPI geom_jitter](figure/SPI geom_jitter-1.png)
 
 
