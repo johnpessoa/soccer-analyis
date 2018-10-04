@@ -299,6 +299,6 @@ results_combined_5 %>%
   ggtitle("Barclays Premier League Comparison","SPI of Premier League teams compared to the rest")
 ```
 
-![plot of chunk graph 1](figure/graph 1-1.png)
+![plot of chunk graph_1](figure/graph_1-1.png)
 
 
