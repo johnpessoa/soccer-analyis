@@ -18,8 +18,10 @@ spi_global_rankings_int <- read.csv("~/Downloads/soccer-spi 2/spi_global_ranking
 Let's take a look at the data that I have from FiveThirtyEight and see what I'll need to do to clean it up
 
 ```r
-spi_matches %>% 
-  mutate(match_id = row_number()) %>% 
+spi_matches_2 <- spi_matches %>% 
+  mutate(match_id = row_number())
+
+spi_matches_2 %>% 
   head() %>% 
   knitr::kable()
 ```

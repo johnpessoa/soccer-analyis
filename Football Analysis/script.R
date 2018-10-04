@@ -16,6 +16,13 @@ head(spi_matches)
 spi_matches_2 <- spi_matches %>% 
   mutate(match_id = row_number())
 
+spi_matches_2 %>% 
+  head() %>% 
+  knitr::kable()
+
+spi_matches_2 <- spi_matches %>% 
+  mutate(match_id = row_number())
+
 spi_matches_3 <- spi_matches_2[, c(1, 2, 3, 23, 4:22)]
 
 spi_matches_3 %>%
