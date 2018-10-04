@@ -1,5 +1,5 @@
 # Is the Premier League the most competitive league in the world? 
-Let's take a look at the spi matches data to analyze the quality of the english teams
+## Below are the packages and csv files I'll be using to analyze how great the english teams are compared to the rest of the world
 
 
 ```r
