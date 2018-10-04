@@ -26,17 +26,4 @@ spi_matches_2 %>%
 |2016-08-13 |      2411|Barclays Premier League |Middlesbrough |Stoke City          | 56.32| 60.35| 0.4380| 0.2692|  0.2927|        1.30|        1.01|        33.9|        32.5|      1|      1| 1.40| 0.55|  1.13|  1.06|       1.05|       1.05|        5|
 |2016-08-13 |      2411|Barclays Premier League |Southampton   |Watford             | 69.49| 59.33| 0.5759| 0.1874|  0.2367|        1.91|        1.05|        34.1|        30.7|      1|      1| 1.05| 0.22|  1.52|  0.41|       1.05|       1.05|        6|
 
-```r
-knitr::spin("~/Desktop/Futebol Analysis/Football Analysis/matches.r")
-```
-
-```
-## 
-## 
-## processing file: ~/Desktop/Futebol Analysis/Football Analysis/matches.Rmd
-```
-
-```
-## Error in parse_block(g[-1], g[1], params.src): duplicate label 'Packages and data files'
-```
 
