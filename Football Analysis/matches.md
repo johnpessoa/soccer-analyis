@@ -261,20 +261,34 @@ premier_league_table <- premier_league_results %>%
   select(season, rank, team, total_points, total_goal_differential)
 
 premier_league_table %>% 
-  head() %>% 
+  head(n = 20) %>% 
   knitr::kable()
 ```
 
 
 
-|season  | rank|team              | total_points| total_goal_differential|
-|:-------|----:|:-----------------|------------:|-----------------------:|
-|2016-17 |    1|Chelsea           |           93|                      52|
-|2016-17 |    2|Tottenham Hotspur |           86|                      60|
-|2016-17 |    3|Manchester City   |           78|                      41|
-|2016-17 |    4|Liverpool         |           76|                      36|
-|2016-17 |    5|Arsenal           |           75|                      33|
-|2016-17 |    6|Manchester United |           69|                      25|
+|season  | rank|team                 | total_points| total_goal_differential|
+|:-------|----:|:--------------------|------------:|-----------------------:|
+|2016-17 |    1|Chelsea              |           93|                      52|
+|2016-17 |    2|Tottenham Hotspur    |           86|                      60|
+|2016-17 |    3|Manchester City      |           78|                      41|
+|2016-17 |    4|Liverpool            |           76|                      36|
+|2016-17 |    5|Arsenal              |           75|                      33|
+|2016-17 |    6|Manchester United    |           69|                      25|
+|2016-17 |    7|Everton              |           61|                      18|
+|2016-17 |    8|AFC Bournemouth      |           46|                     -12|
+|2016-17 |    9|Southampton          |           46|                      -7|
+|2016-17 |   10|West Bromwich Albion |           45|                      -8|
+|2016-17 |   11|West Ham United      |           45|                     -17|
+|2016-17 |   12|Leicester City       |           44|                     -15|
+|2016-17 |   13|Stoke City           |           44|                     -15|
+|2016-17 |   14|Crystal Palace       |           41|                     -13|
+|2016-17 |   15|Swansea City         |           41|                     -25|
+|2016-17 |   16|Burnley              |           40|                     -16|
+|2016-17 |   17|Watford              |           40|                     -28|
+|2016-17 |   18|Hull City            |           34|                     -43|
+|2016-17 |   19|Middlesbrough        |           28|                     -26|
+|2016-17 |   20|Sunderland           |           24|                     -40|
 
 ## What's the SPI of Premier League teams looking like every week compared to the rest of the world? 
 I'm pretty sure I'm able to create some sort of visual here highlight premier league teams SPI and greying out
