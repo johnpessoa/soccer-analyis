@@ -143,6 +143,8 @@ results_combined_4 <-  results_combined_3 %>%
 results_combined_5 <- results_combined_4[, c(1,2,3,29,4:28)]
 ```
 
+###Tidy Data
+
 Alright. Let's see how this looks after the clean up.
 
 
@@ -162,5 +164,39 @@ results_combined_5 %>%
 |        2|      1843|French Ligue 1          |2016-17 |2016-08-12  |Guingamp            |    0|AS Monaco           |        1| 56.48|   68.85| 0.1669|   0.5714|  0.2617|     2|         2|       0.86|           1.82|       22.9|           53.7| 0.77|   2.45| 0.42|     1.75|      2.10|          2.10|tie    |      1|                 0|
 |        3|      2411|Barclays Premier League |2016-17 |2016-08-13  |Hull City           |    1|Leicester City      |        0| 53.57|   66.81| 0.3459|   0.3621|  0.2921|     2|         1|       1.16|           1.24|       38.1|           22.2| 0.85|   2.77| 0.17|     1.25|      2.10|          1.05|win    |      3|                 1|
 |        3|      2411|Barclays Premier League |2016-17 |2016-08-13  |Leicester City      |    0|Hull City           |        1| 66.81|   53.57| 0.3621|   0.3459|  0.2921|     1|         2|       1.24|           1.16|       22.2|           38.1| 2.77|   0.85| 1.25|     0.17|      1.05|          2.10|loss   |      0|                -1|
+
+This looks a lot better now that I've been able to have records for all home and away teams. Now I will be able to analyze
+how the premier league teams are compared to everyone else. Before I get to that, let's see if I am able to create
+the league standings through this data.
+
+
+```r
+bpl_standings <- results_combined_5 %>%
+  filter(league == "Barclays Premier League") %>% 
+  mutate(goal_differential = ifelse(is.na(goal_differential), 0, goal_differential)) %>% 
+  #filter(season == "2016-17") %>% 
+  group_by(season, team) %>% 
+  summarise(total_points = sum(points),
+            total_goal_differential = sum(goal_differential)) %>% 
+  arrange(season, desc(total_points)) %>%
+  group_by(season) %>% 
+  mutate(rank = row_number()) %>% 
+  select(season, rank, team, total_points, total_goal_differential)
+
+bpl_standings %>%  
+  head() %>% 
+  knitr::kable()
+```
+
+
+
+|season  | rank|team              | total_points| total_goal_differential|
+|:-------|----:|:-----------------|------------:|-----------------------:|
+|2016-17 |    1|Chelsea           |           93|                      52|
+|2016-17 |    2|Tottenham Hotspur |           86|                      60|
+|2016-17 |    3|Manchester City   |           78|                      41|
+|2016-17 |    4|Liverpool         |           76|                      36|
+|2016-17 |    5|Arsenal           |           75|                      33|
+|2016-17 |    6|Manchester United |           69|                      25|
 
 
