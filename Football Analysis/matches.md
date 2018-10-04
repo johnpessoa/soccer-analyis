@@ -19,7 +19,7 @@ Let's take a look at the data that I have from FiveThirtyEight and see what I'll
 
 ```r
 spi_matches %>% 
-  mutate(match_id = row_number())
+  mutate(match_id = row_number()) %>% 
   head() %>% 
   knitr::kable()
 ```
