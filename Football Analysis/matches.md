@@ -284,7 +284,9 @@ all other teams SPI.
 
 ```r
 grey_results <- results_combined_5[, -6] %>% filter(date_actual < "2018-09-20")
+```
 
+```r
 results_combined_5 %>% 
   filter(league == "Barclays Premier League", date_actual < "2018-09-20") %>% 
   ggplot(aes(date_actual, spi, color = league)) + 
@@ -297,6 +299,6 @@ results_combined_5 %>%
   ggtitle("Barclays Premier League Comparison","SPI of Premier League teams compared to the rest")
 ```
 
-![plot of chunk SPI geom_jitter](figure/SPI geom_jitter-1.png)
+![plot of chunk graph 1](figure/graph 1-1.png)
 
 
