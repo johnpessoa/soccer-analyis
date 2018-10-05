@@ -318,6 +318,6 @@ results_combined_5 %>%
   ylab("SPI")
 ```
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
+![plot of chunk bplgraph](figure/bplgraph-1.png)
 
 
