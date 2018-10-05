@@ -305,6 +305,7 @@ grey_results <- results_combined_5[, -6] %>% filter(date_actual < "2018-09-20")
 ## SPI of Premier League teams compared to the rest
 
 
+
 ```r
 results_combined_5 %>% 
   filter(league == "Barclays Premier League", date_actual < "2018-09-20") %>% 
@@ -317,6 +318,6 @@ results_combined_5 %>%
   ylab("SPI")
 ```
 
-![plot of chunk bplcomp](figure/bplcomp-1.png)
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
 
 
