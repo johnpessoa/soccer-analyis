@@ -10,6 +10,7 @@ source("~/Desktop/token.R")
 library(expappr)
 ```
 
+
 ```r
 spi_matches <- read.csv("~/Downloads/soccer-spi 2/spi_matches.csv")
 spi_global_rankings <-  read.csv("~/Downloads/soccer-spi 2/spi_global_rankings.csv")
