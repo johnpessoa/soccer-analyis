@@ -316,6 +316,6 @@ results_combined_5 %>%
   ylab("SPI")
 ```
 
-![plot of chunk bplcomparison](figure/bplcomparison-1.png)
+![plot of chunk bplcomp](figure/bplcomp-1.png)
 
 
