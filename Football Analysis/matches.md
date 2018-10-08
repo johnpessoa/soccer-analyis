@@ -379,9 +379,79 @@ top_6_grey_results <- avg_spi_per_league %>%
   select(- "average_spi")
 ```
 
+```r
+top_6_league_results %>% 
+  filter(league == "Spanish Primera Division", date_actual < "2018-09-20") %>% 
+  ggplot(aes(date_actual, spi, color = league)) +
+  geom_jitter(data = top_6_grey_results, size = 3, alpha = .5, colour = "grey") +
+  geom_jitter(size = 3, colour = "deepskyblue3") +
+  theme_expapp() +
+  scale_color_discrete(guide = FALSE) +
+  xlab("Date") +
+  ylab("SPI") +
+  ggtitle("SPI Comparison","La Liga")
+```
 
+![plot of chunk la_liga](figure/la_liga-1.png)
 
+```r
+top_6_league_results %>% 
+  filter(league == "German Bundesliga", date_actual < "2018-09-20") %>% 
+  ggplot(aes(date_actual, spi, color = league)) +
+  geom_jitter(data = top_6_grey_results, size = 3, alpha = .5, colour = "grey") +
+  geom_jitter(size = 3, colour = "deepskyblue3") +
+  theme_expapp() +
+  scale_color_discrete(guide = FALSE) +
+  xlab("Date") +
+  ylab("SPI") +
+  ggtitle("SPI Comparison","Bundesliga")
+```
 
+![plot of chunk bundesliga](figure/bundesliga-1.png)
 
+```r
+top_6_league_results %>% 
+  filter(league == "Barclays Premier League", date_actual < "2018-09-20") %>% 
+  ggplot(aes(date_actual, spi, color = league)) +
+  geom_jitter(data = top_6_grey_results, size = 3, alpha = .5, colour = "grey") +
+  geom_jitter(size = 3, colour = "deepskyblue3") +
+  theme_expapp() +
+  scale_color_discrete(guide = FALSE) +
+  xlab("Date") +
+  ylab("SPI") +
+  ggtitle("SPI Comparison","Premier League")
+```
+
+![plot of chunk premier_league](figure/premier_league-1.png)
+
+```r
+top_6_league_results %>% 
+  filter(league == "Italy Serie A", date_actual < "2018-09-20") %>% 
+  ggplot(aes(date_actual, spi, color = league)) +
+  geom_jitter(data = top_6_grey_results, size = 3, alpha = .5, colour = "grey") +
+  geom_jitter(size = 3, colour = "deepskyblue3") +
+  theme_expapp() +
+  scale_color_discrete(guide = FALSE) +
+  xlab("Date") +
+  ylab("SPI") +
+  ggtitle("SPI Comparison","Serie A")
+```
+
+![plot of chunk serie_a](figure/serie_a-1.png)
+
+```r
+top_6_league_results %>% 
+  filter(league == "French Ligue 1", date_actual < "2018-09-20") %>% 
+  ggplot(aes(date_actual, spi)) +
+  geom_jitter(data = top_6_grey_results, size = 3, alpha = .5, colour = "grey") +
+  geom_jitter(size = 3, colour = "deepskyblue3") +
+  theme_expapp() +
+  scale_color_discrete(guide = FALSE) +
+  xlab("Date") +
+  ylab("SPI") +
+  ggtitle("SPI Comparison","French Ligue")
+```
+
+![plot of chunk french_league](figure/french_league-1.png)
 
 
