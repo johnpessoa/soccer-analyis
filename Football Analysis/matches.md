@@ -320,9 +320,68 @@ results_combined_5 %>%
   theme_expapp() +
   scale_color_discrete(guide = FALSE) +
   xlab("Date") +
-  ylab("SPI")
+  ylab("SPI") +
+  ggtitle("SPI Comparison","How high are the SPI's of Premier League teams?")
 ```
 
 ![plot of chunk bplgraph](figure/bplgraph-1.png)
+
+This graph doesn't illustrate that Premier League SPI's are higher than every other league. However, it does illustrate
+that it is most likely one of the top leagues in the world. In my opinion, if I want to dig a little more, it could
+be beneficial to look at other leagues and see how they look. Let's look at the top SPI average by league and see
+what are the top 6 leagues.
+
+
+
+```r
+avg_spi_per_league <- results_combined_5 %>% 
+  group_by(league) %>% 
+  summarise(average_spi = mean(spi)) %>% 
+  arrange(desc(average_spi))
+
+avg_spi_per_league %>% 
+  head(n = 10) %>% 
+  knitr::kable()
+```
+
+
+
+|league                   | average_spi|
+|:------------------------|-----------:|
+|UEFA Champions League    |    76.78626|
+|Spanish Primera Division |    73.09585|
+|German Bundesliga        |    68.89590|
+|Barclays Premier League  |    67.32261|
+|Italy Serie A            |    63.70981|
+|UEFA Europa League       |    60.87087|
+|French Ligue 1           |    60.47847|
+|Russian Premier Liga     |    54.17495|
+|Brasileiro Série A       |    49.93503|
+|Belgian Jupiler League   |    48.38681|
+
+We will want to remove the european competitions because those include teams from a number of different countries.
+It is interesting that both La Liga and Bundesliga have a higher SPI. To be fair, this data only goes back a couple
+years and I can see Barcelona, Real Madrid, and Bayern Munich skewing the average.  
+
+
+
+```r
+top_6_league_results <- avg_spi_per_league %>% 
+  filter(!(league %in% c("UEFA Champions League", "UEFA Europa League"))) %>% 
+  mutate(league_spi_rank = rank(desc(average_spi))) %>% 
+  inner_join(results_combined_5, by = "league") %>% 
+  select(- "average_spi")
+
+top_6_grey_results <- avg_spi_per_league %>% 
+  filter(!(league %in% c("UEFA Champions League", "UEFA Europa League"))) %>% 
+  mutate(league_spi_rank = rank(desc(average_spi))) %>% 
+  inner_join(grey_results, by = "league") %>% 
+  select(- "average_spi")
+```
+
+
+
+
+
 
 
